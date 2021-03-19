@@ -70,7 +70,7 @@ namespace SegmentDS {
 
                 auto intervals = std::vector<ElmInt>();
 
-                for (int i = 0; i < x_coords.size(); i+=2) {
+                for (int i = 0; i < x_coords.size()-1; ++i) {
                     if (i == 0) {
                         intervals.push_back(ElmInt(std::numeric_limits<double>::lowest(), x_coords[i], OO));
                         intervals.push_back(ElmInt(x_coords[i], x_coords[i], CC));
@@ -100,8 +100,10 @@ namespace SegmentDS {
                 }
             }
 
-            void vertical_query(Segment query_seg, std::vector<Segment> output) {
-                
+            void vertical_query(Segment query_seg, std::vector<Segment>& output) {
+                if (first_layer_structure.get_root() != nullptr)
+                    first_layer_structure.get_root()
+                    ->vertical_query(query_seg, output);
             }
 
             void count_segs() {

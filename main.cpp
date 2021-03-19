@@ -60,13 +60,30 @@ int main() {
     //     x2*cos(theta) - (y+0.0001)*sin(theta), x2*sin(theta) + (y+0.0001)* cos(theta)));
     // }
 
-    for (int i = 0; i < 1000000; ++i) {
-        segs.push_back(new SegmentDS::Segment((i+1)*(0-(1/(i+1))), (i+1)*(0 + i), (i+1)*(1-1/(i+1)), (i+1)*(1 + i)));
-    }
+    // for (int i = 0; i < 1000000; ++i) {
+    //     segs.push_back(new SegmentDS::Segment((i+1)*(0-(1/(i+1))), (i+1)*(0 + i), (i+1)*(1-1/(i+1)), (i+1)*(1 + i)));
+    // }
 
+    double eps = 0.001;
+
+    segs.push_back(new SegmentDS::Segment(0, 0, 1, 1));
+    segs.push_back(new SegmentDS::Segment(0.1, 0.1 + eps, 1.1, 1.1 + eps));
+    segs.push_back(new SegmentDS::Segment(0.2, 0.2 + 2*eps, 1.2, 1.2 + 2*eps));
+    segs.push_back(new SegmentDS::Segment(0.3, 0.3 + 3*eps, 1.3, 1.3 + 3*eps));
+    segs.push_back(new SegmentDS::Segment(0.4, 0.4 + 4*eps, 1.4, 1.4 + 4*eps));
+    segs.push_back(new SegmentDS::Segment(0.5, 0.5 + 5*eps, 1.5, 1.5 + 5*eps));
+    segs.push_back(new SegmentDS::Segment(0.6, 0.6 + 6*eps, 1.6, 1.6 + 6*eps));
+    segs.push_back(new SegmentDS::Segment(0.7, 0.7 + 7*eps, 1.7, 1.7 + 7*eps));
+    segs.push_back(new SegmentDS::Segment(0.8, 0.8 + 8*eps, 1.8, 1.8 + 8*eps));
+
+    auto query_seg = SegmentDS::Segment(0.05, -10, 0.05, 10);
+    auto output = std::vector<SegmentDS::Segment>();
     std::cout << "start\n";
     auto segDS = SegmentDS::SegmentDS(segs);
     std::cout << "done\n";
+    
+    segDS.vertical_query(query_seg, output);
+    
     segDS.count_segs();
     std::cout << "segs in DS: " << SegmentDS::seg_count << std::endl;
 }

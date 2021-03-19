@@ -40,8 +40,8 @@ namespace SegmentDS {
             }
 
             bool intersects(Segment seg) {
-                return (seg.x1() >= left && seg.x1() <= right)
-                || (seg.x2() >= left && seg.x2() <= right);
+                return is_covered(seg) || ((seg.x1() >= left && seg.x1() <= right)
+                || (seg.x2() >= left && seg.x2() <= right));
             }
 
             bool contains(double qx) {
