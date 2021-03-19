@@ -8,14 +8,14 @@
 #include <CGAL/Segment_2.h>
 #include <CGAL/Point_2.h>
 
-using Kernel = CGAL::Cartesian<double>;
-using Point_2 = CGAL::Point_2<Kernel>;
-using Line_2 = CGAL::Line_2<Kernel>;
-using Segment_2 = CGAL::Line_2<Kernel>;
-
 namespace SegmentDS {
     int seg_count = 0;
     int node_visits = 0;
+
+    using Kernel = CGAL::Cartesian<double>;
+    using Point_2 = CGAL::Point_2<Kernel>;
+    using Line_2 = CGAL::Line_2<Kernel>;
+    using Segment_2 = CGAL::Line_2<Kernel>;
 
     struct KeyStruct {
         double val;
