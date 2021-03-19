@@ -56,6 +56,6 @@ namespace SegmentDS {
             void post_order(NodeType* node);
 
     };
-
 }
+
 #include "LeafDataAVL.cpp"

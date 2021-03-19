@@ -6,6 +6,7 @@
 #include <vector>
 
 namespace SegmentDS {
+
     class SegmentDS {
         private:
 
@@ -101,6 +102,9 @@ namespace SegmentDS {
             }
 
             void vertical_query(Segment query_seg, std::vector<Segment>& output) {
+
+                node_visits = 0;
+
                 if (first_layer_structure.get_root() != nullptr)
                     first_layer_structure.get_root()
                     ->vertical_query(query_seg, output);
