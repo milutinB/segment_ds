@@ -162,7 +162,7 @@ namespace SegmentDS {
 
             void vertical_query(Segment query_seg, std::vector<Segment>& output) {
 
-                node_visits++;
+                node_visits += 2;
 
                 Line_2 line = Line_2(Point_2(key.seg.x1(), key.seg.y1()), 
                 Point_2(key.seg.x2(), key.seg.y2()));
