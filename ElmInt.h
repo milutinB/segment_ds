@@ -45,7 +45,6 @@ namespace SegmentDS {
             }
 
             bool contains(double qx) {
-                node_visits++;
                 switch (type) {
                     case CC: {
                         return qx >= left && qx <= right;
