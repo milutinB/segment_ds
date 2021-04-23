@@ -126,8 +126,12 @@ namespace SegmentDS {
 
             void vertical_query(Segment query_seg, std::vector<Segment>& output) {
                 
-                // node_visits++;
-                
+                if (left != nullptr)
+                    node_visits += 1;
+
+                if (right != nullptr)
+                    node_visits += 1;
+                    
                 if (union_interval.contains(query_seg.x1())) {
                     if (second_layer_structure.get_root() != nullptr) {
                         second_layer_structure.get_root()
