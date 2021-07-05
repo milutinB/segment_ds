@@ -60,6 +60,9 @@ namespace SegmentDS {
             }
 
         public:
+
+            int node_count() { return FirstLayerNode::count + SecondLayerNode::count; }
+
             SegmentDS(std::vector<Segment*> segments) {
                 auto x_coords = std::vector<double>();
 

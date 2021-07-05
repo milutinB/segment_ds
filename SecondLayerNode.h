@@ -50,12 +50,15 @@ namespace SegmentDS {
 
         public:
 
+            inline static int count = 0;
+
             SecondLayerNode() {
                 left = nullptr;
                 right = nullptr;
                 parent = nullptr;
                 height = 1;
                 // key = 0;
+                count++;
             }
 
             SecondLayerNode(ElmInt _host_interval, Segment _seg) {
@@ -75,6 +78,8 @@ namespace SegmentDS {
 
                 auto int_obj = CGAL::intersection(vertical_boundary, seg_line);
                 key = KeyStruct(boost::get<Point_2>(*int_obj).y(), seg);
+
+                count++;
             }
 
             KeyStruct get_key() {

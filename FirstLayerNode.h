@@ -20,6 +20,8 @@ namespace SegmentDS {
 
         public:
 
+            inline static int count = 0;
+
             void set_union_interval(ElmInt interval) {
                 union_interval = interval;
             };
@@ -33,7 +35,7 @@ namespace SegmentDS {
                 parent = nullptr;
                 height = 1;
                 key = ElmInt(0, 0, CC);
-
+                count++;    
                 second_layer_structure = LeafDataAVL<SecondLayerNode>();
             }
 
@@ -43,6 +45,7 @@ namespace SegmentDS {
                 parent = nullptr;
                 height = 1;
                 key = _key;
+                count++;
             }
 
             void insert_segment(Segment* seg) {

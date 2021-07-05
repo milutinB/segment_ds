@@ -86,4 +86,6 @@ int main() {
     
     segDS.count_segs();
     std::cout << "segs in DS: " << SegmentDS::seg_count << std::endl;
+
+    std::cout << "size: " << segDS.node_count() << std::endl;
 }
