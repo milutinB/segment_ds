@@ -68,16 +68,17 @@ class AbstractNode {
 
             if (left == nullptr && right == nullptr)
                 return;
-
             if (left == nullptr && right != nullptr)
                 height = right->get_height() + 1;
             else if (right == nullptr && left != nullptr)
                 height = left->get_height() + 1;
             else
                 height = std::max(right->get_height(), left->get_height()) + 1;
+        
         }
 
         int get_bf() {
+        
             if (left == nullptr && right == nullptr)
                 return 0;
 
@@ -88,6 +89,7 @@ class AbstractNode {
                 return -left->get_height();
 
             return right->get_height() - left->get_height();
+            
         }
 };
 

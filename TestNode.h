@@ -1,7 +1,7 @@
 #pragma once
 
 #include <algorithm>
-#include "AbstractNode.h"
+#include "src/AbstractNode.h"
 
 namespace AVLTest {
     class TestNode: public AbstractNode<int> {

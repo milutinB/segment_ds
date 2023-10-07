@@ -1,8 +1,9 @@
 #include <iostream>
-#include "FirstLayerNode.h"
+#include "src/LeafDataAVL.h"
+#include "src/FirstLayerNode.h"
 #include "TestNode.h"
 #include <vector>
-#include "SegmentDS.h"
+#include "src/SegmentDS.h"
 #include <stdlib.h> 
 #include <unordered_set>
 #include <math.h>
@@ -85,7 +86,7 @@ int main() {
     segDS.vertical_query(query_seg, output);
     
     segDS.count_segs();
-    std::cout << "segs in DS: " << SegmentDS::seg_count << std::endl;
+//     std::cout << "segs in DS: " << SegmentDS::seg_count << std::endl;
 
-    std::cout << "size: " << segDS.node_count() << std::endl;
+//     std::cout << "size: " << segDS.node_count() << std::endl;
 }

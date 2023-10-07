@@ -30,14 +30,6 @@ namespace SegmentDS {
             new_node->set_left(node);
         }
 
-        // if (comp(node, leaf) == 1) {
-        //     new_node->set_right(node);
-        //     new_node->set_left(leaf);
-        // } else {
-        //     new_node->set_right(leaf);
-        //     new_node->set_left(node);
-        // }
-
         if (root == leaf)
             root = new_node;
 
@@ -205,5 +197,4 @@ namespace SegmentDS {
         if (node->get_right() != nullptr)
             post_order(node->get_right());
     }
-
 }
