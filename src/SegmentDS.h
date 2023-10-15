@@ -9,7 +9,6 @@ namespace SegmentDS {
 
     class SegmentDS {
         private:
-
             LeafDataAVL<FirstLayerNode> first_layer_structure;
 
             void insert_segment(Segment* seg, FirstLayerNode* node);
@@ -17,7 +16,6 @@ namespace SegmentDS {
             void combine_intervals(FirstLayerNode* node);
 
         public:
-
             int node_count();
 
             SegmentDS(std::vector<Segment*> segments);
@@ -26,6 +24,7 @@ namespace SegmentDS {
 
             void count_segs();
 
+            // ~SegmentDS();
     };
 
 }

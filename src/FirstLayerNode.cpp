@@ -1,14 +1,16 @@
 #include "FirstLayerNode.h"
 
 namespace SegmentDS {
-   
     void FirstLayerNode::set_union_interval(ElmInt interval) {
         union_interval = interval;
     };
 
     ElmInt& FirstLayerNode::get_union_interval() { return union_interval; }
 
-    FirstLayerNode::~FirstLayerNode() {}
+    FirstLayerNode::~FirstLayerNode() {
+        delete left;
+        delete right;
+    }
 
     FirstLayerNode::FirstLayerNode() {
         left = nullptr;
@@ -43,92 +45,55 @@ namespace SegmentDS {
     }
 
     FirstLayerNode* FirstLayerNode::get_left() {
-        return left;
+        return dynamic_cast<FirstLayerNode*>(left);
     }
 
     FirstLayerNode* FirstLayerNode::get_right() {
-        return right;
+        return dynamic_cast<FirstLayerNode*>(right);
     }
 
     FirstLayerNode* FirstLayerNode::get_parent() {
-        return parent;
+        return dynamic_cast<FirstLayerNode*>(parent);
     }
 
-    void FirstLayerNode::set_parent(FirstLayerNode* other) {
-        parent = other;
+    void FirstLayerNode::set_parent(Node<ElmInt>* other) {
+        parent = dynamic_cast<FirstLayerNode*>(other);
     }
 
-    void FirstLayerNode::set_left(FirstLayerNode* other) {
+    void FirstLayerNode::set_left(Node<ElmInt>* other) {
         left = other;
         if (other != nullptr)
-            other->set_parent(this);
+            dynamic_cast<FirstLayerNode*>(other)->set_parent(this);
     }
 
-    void FirstLayerNode::set_right(FirstLayerNode* other) {
+    void FirstLayerNode::set_right(Node<ElmInt>* other) {
         right = other;
         if (other != nullptr)
-            other->set_parent(this);
+            dynamic_cast<FirstLayerNode*>(other)->set_parent(this);
     }
 
-    void FirstLayerNode::copy_data(FirstLayerNode* other) {
-        parent = other->get_parent();
-        left = other->get_left();
-        right = other->get_right();
-        key = other->get_key();
-        height = other->get_height();
+    void FirstLayerNode::copy_data(Node<ElmInt>* other) {
+        auto _other = dynamic_cast<FirstLayerNode*>(other);
+        parent = _other->get_parent();
+        left = _other->get_left();
+        right = _other->get_right();
+        key = _other->get_key();
+        height = _other->get_height();
     }
 
-    int FirstLayerNode::get_height() {
-        return height;
-    }
-
-    void FirstLayerNode::update_height() {
-
-        if (left == nullptr && right == nullptr)
-            return;
-
-        if (left == nullptr && right != nullptr)
-            height = right->get_height() + 1;
-        else if (right == nullptr && left != nullptr)
-            height = left->get_height() + 1;
-        else
-            height = std::max(right->get_height(), left->get_height()) + 1;
-    }
-
-    int FirstLayerNode::get_bf() {
-        if (left == nullptr && right == nullptr)
-            return 0;
-
-        if (left == nullptr && right != nullptr)
-            return -right->get_height();
-
-        if (left != nullptr && right == nullptr)
-            return -left->get_height();
-
-        return right->get_height() - left->get_height();
-    }
-
-    void FirstLayerNode::vertical_query(Segment query_seg, std::vector<Segment>& output) {
-        
-        // if (left != nullptr)
-        //     node_visits += 1;
-
-        // if (right != nullptr)
-        //     node_visits += 1;
-            
+    void FirstLayerNode::vertical_query(Segment& query_seg, std::vector<Segment>& output) {
         if (union_interval.contains(query_seg.x1())) {
             if (second_layer_structure.get_root() != nullptr) {
                 second_layer_structure.get_root()
                 ->vertical_query(query_seg, output);
             }
         }
-
-        if (left != nullptr && left->get_union_interval()
+        if (left != nullptr && dynamic_cast<FirstLayerNode*>(left)->get_union_interval()
         .contains(query_seg.x1())) {
             left->vertical_query(query_seg, output);
         }
 
-        if (right != nullptr && right->get_union_interval()
+        if (right != nullptr && dynamic_cast<FirstLayerNode*>(right)->get_union_interval()
         .contains(query_seg.x1())) {
             right->vertical_query(query_seg, output);
         }
@@ -142,11 +107,8 @@ namespace SegmentDS {
         }
 
         if (left != nullptr)
-            left->count_segs();
+            dynamic_cast<FirstLayerNode*>(left)->count_segs();
         if (right != nullptr)
-            right->count_segs();
+            dynamic_cast<FirstLayerNode*>(right)->count_segs();
     }
-
-    template class LeafDataAVL<FirstLayerNode>;
-
 }

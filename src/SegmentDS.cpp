@@ -27,7 +27,7 @@ namespace SegmentDS {
         if (!left_null)
             combine_intervals(node->get_left());
         if (!right_null)
-            combine_intervals((node->get_right()));
+            combine_intervals(node->get_right());
 
         if (!(left_null || right_null)) {
             auto& left_int = (node->get_left())->get_union_interval();
@@ -91,6 +91,7 @@ namespace SegmentDS {
             insert_segment(segments[i], root);
         }
     }
+
 
     void SegmentDS::vertical_query(Segment query_seg, std::vector<Segment>& output) {
 

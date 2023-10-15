@@ -3,9 +3,10 @@
 #include "Segment.h"
 #include <stdexcept>
 
-enum INTERVAL_TYPE { CO, OC, OO, CC };
 
 namespace SegmentDS {
+    enum INTERVAL_TYPE { CO, OC, OO, CC };
+
     class ElmInt {
 
         private:

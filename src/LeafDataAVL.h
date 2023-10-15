@@ -1,36 +1,33 @@
 #pragma once
 #include <iostream>
 
-/*
-* A generic implemntation of an AVL tree
-* which stores data in leaves
-* 
-* The class NodeType must implement the following functions:
-* 
-* NodeType* get_right()
-* void set_right(NodeType* _right)
-* NodeType* get_left()
-* void set_right(NodeType* _right)
-* NodeType* get_parent()
-* void set_parent(NodeType* parent)
-* 
-* void copy_data(NodeType* other) copies the children 
-* and parent pointers from other as well as any internal
-* data required for the comp function
-*
-* The comp function should return 1 if the key of the first
-* argument is strictly bigger than that of the second arugument
-* and -1 otherwise.
-*
-*/
-
 namespace SegmentDS {
 
+    /*
+    * A generic implemntation of an AVL tree
+    * which stores data in leaves
+    * 
+    * The class NodeType must implement the following functions:
+    * 
+    * NodeType* get_right()
+    * void set_right(NodeType* _right)
+    * NodeType* get_left()
+    * void set_right(NodeType* _right)
+    * NodeType* get_parent()
+    * void set_parent(NodeType* parent)
+    * 
+    * void copy_data(NodeType* other) copies the children 
+    * and parent pointers from other as well as any internal
+    * data required for the comp function
+    *
+    * The comp function should return 1 if the key of the first
+    * argument is strictly bigger than that of the second arugument
+    * and -1 otherwise.
+    *
+    */
     template <class NodeType>
     class LeafDataAVL {
-
         private:
-
             NodeType* root=nullptr;
 
             void ascend(NodeType* node) {
@@ -99,13 +96,13 @@ namespace SegmentDS {
             }
 
             void rotate_RightLeft(NodeType* X, NodeType* Z) {
-
                 auto old_X_parent = X->get_parent();
 
                 auto Y = Z->get_left();
                 auto t3 = Y->get_right();
                 Z->set_left(t3);
                 Y->set_right(Z);
+
                 auto t2 = Y->get_left();
                 X->set_right(t2);
                 Y->set_left(X);
@@ -168,6 +165,10 @@ namespace SegmentDS {
             }
 
         public:
+            ~LeafDataAVL() {
+                if (root != nullptr)
+                    delete root;
+            }
 
             void insert(NodeType* node) {
                 if (root == nullptr) {
@@ -216,9 +217,4 @@ namespace SegmentDS {
             }
 
     };
-
-    // template class LeafDataAVL<FirstLayerNode>;
-    // template class LeafDataAVL<SecondLayerNode>;
 }
-
-// #include "LeafDataAVL.cpp"
