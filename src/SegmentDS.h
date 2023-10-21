@@ -22,8 +22,6 @@ namespace SegmentDS {
             void vertical_query(Segment query_seg, std::vector<Segment>& output);
 
             void count_segs();
-
-            // ~SegmentDS();
     };
 
 }

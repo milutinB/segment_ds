@@ -78,7 +78,7 @@ namespace SegmentDS {
     void FirstLayerNode::set_right(FirstLayerNode* other) {
         right = other;
         if (other != nullptr)
-            dynamic_cast<FirstLayerNode*>(other)->set_parent(this);
+            other->set_parent(this);
     }
 
     void FirstLayerNode::copy_data(FirstLayerNode* other) {
@@ -96,12 +96,12 @@ namespace SegmentDS {
                 ->vertical_query(query_seg, output);
             }
         }
-        if (left != nullptr && dynamic_cast<FirstLayerNode*>(left)->get_union_interval()
+        if (left != nullptr && left->get_union_interval()
         .contains(query_seg.x1())) {
             left->vertical_query(query_seg, output);
         }
 
-        if (right != nullptr && dynamic_cast<FirstLayerNode*>(right)->get_union_interval()
+        if (right != nullptr && right->get_union_interval()
         .contains(query_seg.x1())) {
             right->vertical_query(query_seg, output);
         }
@@ -111,12 +111,12 @@ namespace SegmentDS {
         if (second_layer_structure.get_root() != nullptr) {
             // if (second_layer_structure.get_root()->get_height() > 5)
             //     std::cout << "interesting...\n";
-            dynamic_cast<SecondLayerNode*>(second_layer_structure.get_root())->count_segs();
+            second_layer_structure.get_root()->count_segs();
         }
 
         if (left != nullptr)
-            dynamic_cast<FirstLayerNode*>(left)->count_segs();
+            (left)->count_segs();
         if (right != nullptr)
-            dynamic_cast<FirstLayerNode*>(right)->count_segs();
+            (right)->count_segs();
     }
 }

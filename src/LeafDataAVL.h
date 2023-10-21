@@ -215,6 +215,5 @@ namespace SegmentDS {
                 if (node->get_right() != nullptr)
                     post_order(node->get_right());
             }
-
     };
 }
