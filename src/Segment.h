@@ -1,4 +1,5 @@
 #pragma once 
+#include <ostream>
 
 namespace SegmentDS {
     class Segment {
@@ -15,12 +16,14 @@ namespace SegmentDS {
 
             Segment();
 
-            double x1();
+            double x1() const;
 
-            double y1();
+            double y1() const;
             
-            double x2();
+            double x2() const;
             
-            double y2();
+            double y2() const;
     };
+
+    std::ostream& operator<<(std::ostream& ostream, const Segment& seg);
 }

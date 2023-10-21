@@ -10,14 +10,14 @@ namespace SegmentDS {
         private:
             LeafDataAVL<FirstLayerNode> first_layer_structure;
 
-            void insert_segment(Segment* seg, FirstLayerNode* node);
+            void insert_segment(Segment& seg, FirstLayerNode* node);
 
             void combine_intervals(FirstLayerNode* node);
 
         public:
             int node_count();
 
-            SegmentDS(std::vector<Segment*> segments);
+            SegmentDS(std::vector<Segment>& segments);
 
             void vertical_query(Segment query_seg, std::vector<Segment>& output);
 

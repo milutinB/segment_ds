@@ -1,0 +1,5 @@
+if(EXISTS "/Users/mica/Documents/segment_ds/test/run_tests[1]_tests.cmake")
+  include("/Users/mica/Documents/segment_ds/test/run_tests[1]_tests.cmake")
+else()
+  add_test(run_tests_NOT_BUILT run_tests_NOT_BUILT)
+endif()

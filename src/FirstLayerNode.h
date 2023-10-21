@@ -29,7 +29,7 @@ namespace SegmentDS {
 
             FirstLayerNode(ElmInt _key);
 
-            void insert_segment(Segment* seg);
+            void insert_segment(Segment& seg);
 
             ElmInt& get_key();
 

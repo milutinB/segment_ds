@@ -2,17 +2,17 @@
 #include "ElmInt.h"
 
 namespace SegmentDS {
-    void SegmentDS::insert_segment(Segment* seg, FirstLayerNode* node) {
-        if (node->get_union_interval().is_covered(*seg))
+    void SegmentDS::insert_segment(Segment& seg, FirstLayerNode* node) {
+        if (node->get_union_interval().is_covered(seg))
             node->insert_segment(seg);
         else {
             if (node->get_left() != nullptr 
             && node->get_left()
-            ->get_union_interval().intersects(*seg))
+            ->get_union_interval().intersects(seg))
                 insert_segment(seg, node->get_left());
             if (node->get_right() != nullptr 
             && node->get_right()
-            ->get_union_interval().intersects(*seg))
+            ->get_union_interval().intersects(seg))
                 insert_segment(seg, node->get_right());
         }
     }
@@ -52,12 +52,12 @@ namespace SegmentDS {
         return FirstLayerNode::count + SecondLayerNode::count; 
     }
 
-    SegmentDS::SegmentDS(std::vector<Segment*> segments) {
+    SegmentDS::SegmentDS(std::vector<Segment>& segments) {
         auto x_coords = std::vector<double>();
 
         for (auto& seg: segments) {
-            x_coords.push_back(seg->x1());
-            x_coords.push_back(seg->x2());
+            x_coords.push_back(seg.x1());
+            x_coords.push_back(seg.x2());
         }
         std::sort(x_coords.begin(), x_coords.end());
 

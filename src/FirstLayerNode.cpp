@@ -31,9 +31,8 @@ namespace SegmentDS {
         count++;
     }
 
-
-    void FirstLayerNode::insert_segment(Segment* seg) {
-        auto node = new SecondLayerNode(union_interval, *seg);
+    void FirstLayerNode::insert_segment(Segment& seg) {
+        auto node = new SecondLayerNode(union_interval, seg);
         second_layer_structure.insert(node);
     }
 

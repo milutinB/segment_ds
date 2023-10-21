@@ -13,6 +13,11 @@ namespace SegmentDS {
             _x2 = x1;
         }
 
+        if (_y1 > _y2) {
+            _y1 = y2;
+            _y2 = y1;
+        }
+
         real = true;
     }
 
@@ -25,8 +30,13 @@ namespace SegmentDS {
         real = false;
     }
 
-    double Segment::x1() { return _x1; }
-    double Segment::y1() { return _y1; }
-    double Segment::x2() { return _x2; }
-    double Segment::y2() { return _y2; }
+    double Segment::x1() const { return _x1; }
+    double Segment::y1() const { return _y1; }
+    double Segment::x2() const { return _x2; }
+    double Segment::y2() const { return _y2; }
+
+    std::ostream& operator<<(std::ostream& ostream, const Segment& seg) {
+        ostream << seg.x1() << " " << seg.y1() << " " << seg.x2() << " " << seg.y2();
+        return ostream;
+    }
 }

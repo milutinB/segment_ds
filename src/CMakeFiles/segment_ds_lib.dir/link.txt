@@ -1,0 +1,2 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar qc libsegment_ds_lib.a CMakeFiles/segment_ds_lib.dir/ElmInt.cpp.o CMakeFiles/segment_ds_lib.dir/SegmentDS.cpp.o CMakeFiles/segment_ds_lib.dir/FirstLayerNode.cpp.o CMakeFiles/segment_ds_lib.dir/SecondLayerNode.cpp.o CMakeFiles/segment_ds_lib.dir/Segment.cpp.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib libsegment_ds_lib.a
