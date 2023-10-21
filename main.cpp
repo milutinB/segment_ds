@@ -1,11 +1,6 @@
 #include <iostream>
-#include "src/LeafDataAVL.h"
-#include "src/FirstLayerNode.h"
 #include <vector>
 #include "src/SegmentDS.h"
-#include <stdlib.h> 
-#include <unordered_set>
-#include <math.h>
 
 int main() {
     auto s1 = SegmentDS::Segment(1, 0, 5, 0);
