@@ -3,7 +3,6 @@
 #include "node_utils.h"
 
 namespace SegmentDS {
-
     /*
     * A generic implemntation of an AVL tree
     * which stores data in leaves
