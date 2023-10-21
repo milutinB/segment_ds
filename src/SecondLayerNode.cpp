@@ -51,48 +51,59 @@ namespace SegmentDS {
         key = _key;
     }
 
+    KeyStruct SecondLayerNode::get_key() {
+        return key;
+    }
+
+    int SecondLayerNode::get_height() {
+        return height;
+    }
+
+    void SecondLayerNode::set_height(int h) {
+        height = h;
+    }
+
     SecondLayerNode* SecondLayerNode::get_left() {
-        return dynamic_cast<SecondLayerNode*>(left);
+        return left;
     }
 
     SecondLayerNode* SecondLayerNode::get_right() {
-        return dynamic_cast<SecondLayerNode*>(right);
+        return right;
     }
 
     SecondLayerNode* SecondLayerNode::get_parent() {
-        return dynamic_cast<SecondLayerNode*>(parent);
+        return parent;
     }
 
-    void SecondLayerNode::set_parent(Node<KeyStruct>* other) {
+    void SecondLayerNode::set_parent(SecondLayerNode* other) {
         parent = other;
     }
 
-    void SecondLayerNode::set_left(Node<KeyStruct>* other) {
+    void SecondLayerNode::set_left(SecondLayerNode* other) {
         left = other;
         if (other != nullptr)
-            dynamic_cast<SecondLayerNode*>(other)->set_parent(this);
+            other->set_parent(this);
     }
 
-    void SecondLayerNode::set_right(Node<KeyStruct>* other) {
+    void SecondLayerNode::set_right(SecondLayerNode* other) {
         right = other;
         if (other != nullptr)
-            dynamic_cast<SecondLayerNode*>(other)->set_parent(this);
+            other->set_parent(this);
     }
 
-    void SecondLayerNode::copy_data(Node<KeyStruct>* other) {
-        SecondLayerNode* _other = dynamic_cast<SecondLayerNode*>(other);
-        parent = _other->get_parent();
-        left = _other->get_left();
-        right = _other->get_right();
-        key = _other->get_key();
-        height = _other->get_height();
+    void SecondLayerNode::copy_data(SecondLayerNode* other) {
+        parent = other->get_parent();
+        left = other->get_left();
+        right = other->get_right();
+        key = other->get_key();
+        height = other->get_height();
     }
 
     void SecondLayerNode::count_segs() {
         if (left != nullptr)
-            dynamic_cast<SecondLayerNode*>(left)->count_segs();
+            left->count_segs();
         if (right != nullptr)
-            dynamic_cast<SecondLayerNode*>(right)->count_segs();
+            right->count_segs();
     }
 
     void SecondLayerNode::vertical_query(Segment& query_seg, std::vector<Segment>& output) {

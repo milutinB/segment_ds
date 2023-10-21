@@ -1,13 +1,20 @@
 #include <gtest/gtest.h>
-#include "../src/Node.h"
+#include "../src/node_utils.h"
 #include "../src/Segment.h"
 
 namespace {
-    class MockNode : public SegmentDS::Node<int> {
+    class MockNode {
+        private:
+            int height = 1;
+            MockNode* left;
+            MockNode* right;
+            MockNode* parent;
         public:
+            void set_height(int h) {height = h;}
             void set_left(MockNode* other) {left = other;}
             void set_parent(MockNode* other) {parent = other;}
             void set_right(MockNode* other) {right = other;}
+            int get_height() {return height;}
             MockNode* get_left() {return dynamic_cast<MockNode*>(left);}
             MockNode* get_right() {return dynamic_cast<MockNode*>(right);}
             MockNode* get_parent() {return dynamic_cast<MockNode*>(parent);}
@@ -25,7 +32,7 @@ namespace {
         // test height before update is 1
         EXPECT_EQ(1, a.get_height());
 
-        a.update_height();
+        SegmentDS::update_height<MockNode>(&a);
 
         // test height after update is 2
         EXPECT_EQ(2, a.get_height());
@@ -41,11 +48,11 @@ namespace {
         // test height still 2 before updates...
         EXPECT_EQ(2, a.get_height());
 
-        f.update_height();
-        e.update_height();
-        d.update_height();
-        b.update_height();
-        a.update_height();
+        SegmentDS::update_height<MockNode>(&f);
+        SegmentDS::update_height<MockNode>(&e);
+        SegmentDS::update_height<MockNode>(&d);
+        SegmentDS::update_height<MockNode>(&b);
+        SegmentDS::update_height<MockNode>(&a);
 
         // test height of all updated nodes is correct
         EXPECT_EQ(1, f.get_height());
@@ -90,14 +97,14 @@ namespace {
         c.set_height(1);
 
         // test that the balance factor of leaves is 0
-        EXPECT_EQ(0, g.get_bf());
-        EXPECT_EQ(0, f.get_bf());
-        EXPECT_EQ(0, c.get_bf());
+        EXPECT_EQ(0, SegmentDS::get_bf<MockNode>(&g));
+        EXPECT_EQ(0, SegmentDS::get_bf<MockNode>(&f));
+        EXPECT_EQ(0, SegmentDS::get_bf<MockNode>(&c));
 
         // test the balance factor of b is -1
-        EXPECT_EQ(-1, b.get_bf());
+        EXPECT_EQ(-1, SegmentDS::get_bf<MockNode>(&b));
         
         // test the balance factor of a is -2
-        EXPECT_EQ(-2, a.get_bf());
+        EXPECT_EQ(-2, SegmentDS::get_bf<MockNode>(&a));
     }
 }

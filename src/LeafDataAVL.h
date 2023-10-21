@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include "node_utils.h"
 
 namespace SegmentDS {
 
@@ -31,10 +32,10 @@ namespace SegmentDS {
             NodeType* root=nullptr;
 
             void ascend(NodeType* node) {
-                if (abs(node->get_bf()) >= 2)
+                if (abs(get_bf<NodeType>(node)) >= 2)
                     repair(node);
 
-                node->update_height();
+                update_height<NodeType>(node);
                 if (node->get_parent() != nullptr)
                     ascend(node->get_parent());
             }
@@ -44,12 +45,12 @@ namespace SegmentDS {
                 auto right = node->get_right();
 
                 if (left->get_height() > right->get_height()) {
-                    if (left->get_bf() > 0)
+                    if (get_bf<NodeType>(left) > 0)
                         rotate_LeftRight(node, left);
                     else
                         rotate_Right(node, left);
                 } else {
-                    if (right->get_bf() < 0)
+                    if (get_bf<NodeType>(right) < 0)
                         rotate_RightLeft(node, right);
                     else
                         rotate_Left(node, right);
@@ -107,8 +108,8 @@ namespace SegmentDS {
                 X->set_right(t2);
                 Y->set_left(X);
 
-                Z->update_height();
-                X->update_height();
+                update_height<NodeType>(Z);
+                update_height<NodeType>(X);
 
                 if (X == root) {
                     root = Y;
@@ -133,8 +134,8 @@ namespace SegmentDS {
                 X->set_left(t2);
                 Y->set_right(X);
 
-                Z->update_height();
-                X->update_height();
+                update_height<NodeType>(Z);
+                update_height<NodeType>(X);
 
                 if (X == root) {
                     root = Y;

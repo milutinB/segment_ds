@@ -7,7 +7,7 @@
 #include <CGAL/Line_2.h>
 #include <CGAL/Segment_2.h>
 #include <CGAL/Point_2.h>
-#include "Node.h"
+// #include "Node.h"
 
 namespace SegmentDS {
     struct KeyStruct {
@@ -22,11 +22,16 @@ namespace SegmentDS {
         bool operator>(KeyStruct& other);
     };
 
-    class SecondLayerNode : public Node<KeyStruct> {
-
+    class SecondLayerNode {
         private:
+            SecondLayerNode* left;
+            SecondLayerNode* right;
+            SecondLayerNode* parent;
+            int height = 1;
+            KeyStruct key;
             Segment seg;
             ElmInt host_interval;
+            
 
         public:
             inline static int count = 0;
@@ -37,29 +42,35 @@ namespace SegmentDS {
 
             void set_key(KeyStruct _key);
 
+            KeyStruct get_key();
+
+            void set_height(int h);
+
+            int get_height();
+
             SecondLayerNode* get_left();
 
             SecondLayerNode* get_right();
 
             SecondLayerNode* get_parent();
 
-            void set_parent(Node<KeyStruct>* other);
+            void set_parent(SecondLayerNode* other);
 
-            void set_left(Node<KeyStruct>* other);
+            void set_left(SecondLayerNode* other);
 
-            void set_right(Node<KeyStruct>* other);
+            void set_right(SecondLayerNode* other);
 
             /**
              * @brief copies member variables from other
              * 
              * @param other 
              */
-            void copy_data(Node<KeyStruct>* other);
+            void copy_data(SecondLayerNode* other);
 
             void count_segs();
             
-            void vertical_query(Segment& query_seg, std::vector<Segment>& output) override;
+            void vertical_query(Segment& query_seg, std::vector<Segment>& output);
 
-            ~SecondLayerNode() override;
+            ~SecondLayerNode();
     };
 }

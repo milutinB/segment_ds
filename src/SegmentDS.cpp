@@ -1,4 +1,5 @@
 #include "SegmentDS.h"
+#include "ElmInt.h"
 
 namespace SegmentDS {
     void SegmentDS::insert_segment(Segment* seg, FirstLayerNode* node) {
@@ -6,13 +7,13 @@ namespace SegmentDS {
             node->insert_segment(seg);
         else {
             if (node->get_left() != nullptr 
-            && (node->get_left())
+            && (dynamic_cast<FirstLayerNode*>(node->get_left()))
             ->get_union_interval().intersects(*seg))
-                insert_segment(seg, (node->get_left()));
+                insert_segment(seg, (dynamic_cast<FirstLayerNode*>(node->get_left())));
             if (node->get_right() != nullptr 
-            && (node->get_right())
+            && (dynamic_cast<FirstLayerNode*>(node->get_right()))
             ->get_union_interval().intersects(*seg))
-                insert_segment(seg, (node->get_right()));
+                insert_segment(seg, (dynamic_cast<FirstLayerNode*>(node->get_right())));
         }
     }
 
@@ -25,23 +26,23 @@ namespace SegmentDS {
         bool right_null = node->get_right() == nullptr;
 
         if (!left_null)
-            combine_intervals(node->get_left());
+            combine_intervals(dynamic_cast<FirstLayerNode*>(node->get_left()));
         if (!right_null)
-            combine_intervals(node->get_right());
+            combine_intervals(dynamic_cast<FirstLayerNode*>(node->get_right()));
 
         if (!(left_null || right_null)) {
-            auto& left_int = (node->get_left())->get_union_interval();
-            auto& right_int = (node->get_right())->get_union_interval();
+            auto& left_int = (dynamic_cast<FirstLayerNode*>(node->get_left()))->get_union_interval();
+            auto& right_int = (dynamic_cast<FirstLayerNode*>(node->get_right()))->get_union_interval();
             node->set_union_interval(
                 left_int + right_int
             );
         } else if (!left_null)
             node->set_union_interval(
-                (node->get_left())->get_union_interval()
+                (dynamic_cast<FirstLayerNode*>(node->get_left()))->get_union_interval()
             );
         else if (!right_null)
             node->set_union_interval(
-                (node->get_right())->get_union_interval()
+                (dynamic_cast<FirstLayerNode*>(node->get_right()))->get_union_interval()
             );
         else
             return; 
@@ -83,9 +84,9 @@ namespace SegmentDS {
             first_layer_structure.insert(node);
         }
 
-        combine_intervals((first_layer_structure.get_root()));
+        combine_intervals((dynamic_cast<FirstLayerNode*>(first_layer_structure.get_root())));
 
-        auto root = (first_layer_structure.get_root());
+        auto root = dynamic_cast<FirstLayerNode*>(first_layer_structure.get_root());
 
         for (int i = 0; i < segments.size(); ++i) {
             insert_segment(segments[i], root);
@@ -104,6 +105,6 @@ namespace SegmentDS {
 
     void SegmentDS::count_segs() {
         if (first_layer_structure.get_root() != nullptr)
-            first_layer_structure.get_root()->count_segs();
+            dynamic_cast<FirstLayerNode*>(first_layer_structure.get_root())->count_segs();
     }
 }

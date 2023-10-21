@@ -31,6 +31,7 @@ namespace SegmentDS {
         count++;
     }
 
+
     void FirstLayerNode::insert_segment(Segment* seg) {
         auto node = new SecondLayerNode(union_interval, *seg);
         second_layer_structure.insert(node);
@@ -44,41 +45,48 @@ namespace SegmentDS {
         key = _key;
     }
 
+    int FirstLayerNode::get_height() {
+        return height;
+    }
+
+    void FirstLayerNode::set_height(int h) {
+        height = h;
+    }
+
     FirstLayerNode* FirstLayerNode::get_left() {
-        return dynamic_cast<FirstLayerNode*>(left);
+        return left;
     }
 
     FirstLayerNode* FirstLayerNode::get_right() {
-        return dynamic_cast<FirstLayerNode*>(right);
+        return right;
     }
 
     FirstLayerNode* FirstLayerNode::get_parent() {
-        return dynamic_cast<FirstLayerNode*>(parent);
+        return parent;
     }
 
-    void FirstLayerNode::set_parent(Node<ElmInt>* other) {
-        parent = dynamic_cast<FirstLayerNode*>(other);
+    void FirstLayerNode::set_parent(FirstLayerNode* other) {
+        parent = other;
     }
 
-    void FirstLayerNode::set_left(Node<ElmInt>* other) {
+    void FirstLayerNode::set_left(FirstLayerNode* other) {
         left = other;
         if (other != nullptr)
-            dynamic_cast<FirstLayerNode*>(other)->set_parent(this);
+            other->set_parent(this);
     }
 
-    void FirstLayerNode::set_right(Node<ElmInt>* other) {
+    void FirstLayerNode::set_right(FirstLayerNode* other) {
         right = other;
         if (other != nullptr)
             dynamic_cast<FirstLayerNode*>(other)->set_parent(this);
     }
 
-    void FirstLayerNode::copy_data(Node<ElmInt>* other) {
-        auto _other = dynamic_cast<FirstLayerNode*>(other);
-        parent = _other->get_parent();
-        left = _other->get_left();
-        right = _other->get_right();
-        key = _other->get_key();
-        height = _other->get_height();
+    void FirstLayerNode::copy_data(FirstLayerNode* other) {
+        parent = other->get_parent();
+        left = other->get_left();
+        right = other->get_right();
+        key = other->get_key();
+        height = other->get_height();
     }
 
     void FirstLayerNode::vertical_query(Segment& query_seg, std::vector<Segment>& output) {
@@ -101,9 +109,9 @@ namespace SegmentDS {
 
     void FirstLayerNode::count_segs() {
         if (second_layer_structure.get_root() != nullptr) {
-            if (second_layer_structure.get_root()->get_height() > 5)
-                std::cout << "interesting...\n";
-            second_layer_structure.get_root()->count_segs();
+            // if (second_layer_structure.get_root()->get_height() > 5)
+            //     std::cout << "interesting...\n";
+            dynamic_cast<SecondLayerNode*>(second_layer_structure.get_root())->count_segs();
         }
 
         if (left != nullptr)

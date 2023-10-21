@@ -76,13 +76,15 @@ int main() {
     segs.push_back(new SegmentDS::Segment(0.7, 0.7 + 7*eps, 1.7, 1.7 + 7*eps));
     segs.push_back(new SegmentDS::Segment(0.8, 0.8 + 8*eps, 1.8, 1.8 + 8*eps));
 
-    auto query_seg = SegmentDS::Segment(0.05, -10, 0.05, 10);
+    auto query_seg = SegmentDS::Segment(0.5, -10, 0.5, 10);
     auto output = std::vector<SegmentDS::Segment>();
     std::cout << "start\n";
     auto segDS = SegmentDS::SegmentDS(segs);
     std::cout << "done\n";
     
     segDS.vertical_query(query_seg, output);
+
+     std::cout << "output size: " << output.size() << std::endl;
     
     segDS.count_segs();
 //     std::cout << "segs in DS: " << SegmentDS::seg_count << std::endl;

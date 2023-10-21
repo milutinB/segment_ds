@@ -6,7 +6,6 @@
 #include <vector>
 
 namespace SegmentDS {
-
     class SegmentDS {
         private:
             LeafDataAVL<FirstLayerNode> first_layer_structure;

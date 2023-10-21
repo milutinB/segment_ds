@@ -6,8 +6,13 @@
 #include "SecondLayerNode.h"
 
 namespace SegmentDS {
-    class FirstLayerNode : public Node<ElmInt> {
+    class FirstLayerNode {
         private:
+            FirstLayerNode* left;
+            FirstLayerNode* right;
+            FirstLayerNode* parent;
+            int height = 1;
+            ElmInt key;
             ElmInt union_interval;
             LeafDataAVL<SecondLayerNode> second_layer_structure;
 
@@ -18,7 +23,7 @@ namespace SegmentDS {
             
             ElmInt& get_union_interval();
 
-            ~FirstLayerNode() override;
+            ~FirstLayerNode();
 
             FirstLayerNode();
 
@@ -30,21 +35,25 @@ namespace SegmentDS {
 
             void set_key(ElmInt _key);
 
+            void set_height(int h);
+
+            int get_height();
+
             FirstLayerNode* get_left();
 
             FirstLayerNode* get_right();
 
             FirstLayerNode* get_parent();
 
-            void set_parent(Node<ElmInt>* other);
+            void set_parent(FirstLayerNode* other);
 
-            void set_left(Node<ElmInt>* other);
+            void set_left(FirstLayerNode* other);
 
-            void set_right(Node<ElmInt>* other);
+            void set_right(FirstLayerNode* other);
 
-            void copy_data(Node<ElmInt>* other);
+            void copy_data(FirstLayerNode* other);
 
-            void vertical_query(Segment& query_seg, std::vector<Segment>& output) override;
+            void vertical_query(Segment& query_seg, std::vector<Segment>& output);
 
             void count_segs();
         };
